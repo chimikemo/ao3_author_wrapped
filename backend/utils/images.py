@@ -95,11 +95,9 @@ def create_collage_for_author(list_of_works, json_tags, size, out_file, gradient
 
     try:
         top2_char = [i[0] for i in char_counter.most_common(2)]
-        print(top2_char)
     except:
         try:
             top2_char = [i[0] for i in char_counter.most_common(1)]
-            print(top2_char)
         except:
             top2_char = False
 
@@ -127,7 +125,6 @@ def create_collage_for_author(list_of_works, json_tags, size, out_file, gradient
     random.shuffle(top_tags)
 
     for s in top_tags:
-        print(f"tag: {s}")
         possible_images = glob.glob(f"backend/images/tags/{s}/*.jpg")
         chosen_images.extend(random.sample(possible_images, k=min(len(possible_images), 1)))
     make_collage(chosen_images, size, out_file, gradient_bg)

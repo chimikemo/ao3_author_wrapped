@@ -75,4 +75,4 @@ def create_authors_images(author_name):
     display(collage)
     display(aura)
 
-    return collage, aura, wrapped
+    return

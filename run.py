@@ -71,8 +71,8 @@ def create_authors_images(author_name):
     wrapped = PILImage.open(f"backend/images/generated_images/{shortened_author_name}/wrapped.png")
     collage = PILImage.open(f"backend/images/generated_images/{shortened_author_name}/collage.png")
     aura = PILImage.open(f"backend/images/generated_images/{shortened_author_name}/aura.png")
+    display(wrapped)
     display(collage)
     display(aura)
-    display(wrapped)
 
     return collage, aura, wrapped

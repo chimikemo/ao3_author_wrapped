@@ -5,22 +5,17 @@ from getuseragent import UserAgent
 import random
 import logging
 def retrieve_page(url):
-    print(f"retrieving page {url}")
     useragent = UserAgent("all", requestsPrefix=True).Random()
     time.sleep(random.uniform(2, 5))
     source = requests.get(url, headers=useragent)
-    print("page retrieved")
     return BeautifulSoup(source.text, "lxml")
 
 
 def find_total_pages(soup):
-    print("finding total pages")
     next_button = soup.find("li", class_="next")
-    print(next_button)
     try:
         total = next_button.find_previous_sibling("li")
         t = total.get_text(strip=True)
-        print(f"t: {t}")
         return int(t)
     except:
         return False

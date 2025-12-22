@@ -11,7 +11,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 def match_aura (mapped_tags, aura_names, non_smut_flag = False, random_flag = False):
     counter = collections.Counter(mapped_tags)
     top4 = counter.most_common(4)
-    print(f"top4 tags: {top4}")
     match1, match2 = "", ""
     if len(mapped_tags) == 1:
         match1 = aura_names[mapped_tags]

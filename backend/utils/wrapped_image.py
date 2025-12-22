@@ -18,7 +18,6 @@ def get_top_5(list_of_items):
     return top5
 
 def authors_top_5(list_of_works):
-    print("identifying author's top5s")
     total_tags = []
     total_characters = []
     total_ships = []
@@ -49,10 +48,8 @@ def print_top5(image, section_name, top5_list, font_title, font_text, spacing, v
 def get_character_pic(characters):
     for c in characters:
         try:
-            print(f"character for pic: {c}")
             pics = glob.glob(f"backend/images/tags/characters/{c}/*.jpg")
             pic = random.choice(pics)
-            print(f"character pic chosen: {pic}")
             c1 = Image.open(pic).convert("RGBA")
             c1 = c1.resize((600, 600))
             return c1
@@ -60,7 +57,6 @@ def get_character_pic(characters):
             continue
     pics = glob.glob(f"backend/images/tags/characters/No Character/*.jpg")
     pic = random.choice(pics)
-    print(f"character pic chosen: {pic}")
     c1 = Image.open(pic).convert("RGBA")
     c1 = c1.resize((600, 600))
     return c1
@@ -76,7 +72,6 @@ def create_wrapped_image(author_name, tags, characters, ships, geometric_bg):
     img.paste(side_image, (0, 0))
 
     c1 = get_character_pic(characters)
-    print(f"character pic: {c1}")
     try:
         img.paste(c1, (900, 174), c1)
     except:
@@ -144,7 +139,6 @@ def create_wrapped_for_author(list_of_works, author_name, geometric_bg, gradient
 
     tags, characters, ships, total_words = authors_top_5(list_of_works)
     create_wrapped_image(author_name, tags, characters, ships, geometric_bg)
-    print(f"image creeated -- making blend mode")
     apply_blend_mode(file_name, gradient_bg, file_name, "addition", 0.3)
 
 

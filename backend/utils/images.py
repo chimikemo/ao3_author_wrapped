@@ -49,7 +49,6 @@ def make_collage(images, size, save_as, gradient_bg):
 
 
 def apply_blend_mode(bg_img, fg_image, out_file, blending_mode, opacity):
-    print(f"applying blend mode {blending_mode} to {bg_img} and {fg_image}")
     background_img_raw = ImagePIL.open(bg_img).convert('RGBA')
     foreground_img_raw = ImagePIL.open(fg_image).convert('RGBA')
 
@@ -109,22 +108,17 @@ def create_collage_for_author(list_of_works, json_tags, size, out_file, gradient
     t_count = Counter(tags)
     if top2_char:
         if len(top2_char) > 0 and Path(f"characters/{top2_char[0]}").is_dir():
-            print(f"There is an image for character #1 ({top2_char[0]}")
             top_tags.append(f"characters/{top2_char[0]}")
             top_tags = [i[0] for i in t_count.most_common(8)]
 
         elif len(top2_char) > 1 and Path(f"characters/{top2_char[1]}").is_dir():
-            print(f"There is an image for character #2 ({top2_char[1]}")
             top_tags.append(f"characters/{top2_char[1]}")
             top_tags = [i[0] for i in t_count.most_common(8)]
         else:
-            print(f"There are no images for this person's top2 characters (or they don`t have ")
             top_tags = [i[0] for i in t_count.most_common(9)]
     else:
-        print(f"TThis person doesn't have top characters")
         top_tags = [i[0] for i in t_count.most_common(9)]
 
-    print(f"len(top_tags): {len(top_tags)}")
 
     while len(top_tags) < 9:
         top_tags.append(random.choice(filler_images))
@@ -132,10 +126,8 @@ def create_collage_for_author(list_of_works, json_tags, size, out_file, gradient
     chosen_images = []
     random.shuffle(top_tags)
 
-    print(f"tags: {top_tags}")
     for s in top_tags:
         print(f"tag: {s}")
         possible_images = glob.glob(f"backend/images/tags/{s}/*.jpg")
         chosen_images.extend(random.sample(possible_images, k=min(len(possible_images), 1)))
-    print(chosen_images)
     make_collage(chosen_images, size, out_file, gradient_bg)
